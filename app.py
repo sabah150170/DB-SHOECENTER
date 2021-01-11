@@ -559,7 +559,7 @@ def add_stock():
 			cursor.execute("SELECT COUNT(STOCK_ID) FROM STOCK_INFO WHERE (SHOE_ID= %s and STORE_ID=%s)", (shoe_id[0][0], store_id,))
 			quantity_stock=cursor.fetchall()
 			
-			print("----------------",quantity_stock[0][0],"-------1")
+			print("----------------",len(quantity_stock),"-------1")
 			
 
 			if quantity_stock[0][0]==0:

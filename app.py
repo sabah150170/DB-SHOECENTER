@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request
 import psycopg2
 from psycopg2 import Error
-#from config import config
-
 
 def create_tables():
 	commands=(

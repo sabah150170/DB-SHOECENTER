@@ -596,8 +596,6 @@ def filter_stock():
 		number_color=int(request.form['n_color'])
 		number_gender=int(request.form['n_gender']) 
 
-		print(rate_shoe)
-
 		check_b=0
 		check_c=0
 		check_g=0
@@ -740,6 +738,7 @@ def filter_stock():
 												index_size=(index_size+1)
 
 			if index_size>0:
+				print("SHOE EXIST")
 				deliver=(request.form['deliver'])
 				rate_store=(request.form['rate_store'])
 				price_lower=(request.form['price_lower'])
@@ -769,8 +768,9 @@ def filter_stock():
 
 					#cursor.execute("SELECT * FROM (SELECT * FROM STOCK_INFO WHERE " + command +"INTERSECT SELECT * FROM STOCK_INFO WHERE(PRICE <=%s AND PRICE>=%s AND DELIVER_TIME<=%s AND QUANTITY>=%s AND SIZE=%s)) AS NT1 INNER JOIN (SELECT * FROM STORE_INFO WHERE (RATE_STORE>=%s)) AS NW2 USING(STORE_ID)", (result))
 					result=cursor.fetchall()
-
+				print("--------------------1")
 				print(result)
+				print("--------------------2")
 				return render_template("company_welcome.html", company_id=sid, result2=result, size2=len(result))
 
 			else:
@@ -787,8 +787,6 @@ def update_stock():
 		number=request.form['number']
 		quantity=int(request.form['quantity'])
 		deliver=request.form['deliver']
-
-		print(stock_id)
 
 		if quantity==0:
 			cursor.execute("DELETE FROM BASKET WHERE(STOCK_ID=%s)", (stock_id,))

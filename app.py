@@ -98,21 +98,12 @@ def create_tables():
 
 
 try:
-    url = urlparse.urlparse(os.environ['DATABASE_URL'])
-	dbname = url.path[1:]
-	user = url.username
-	password = url.password
-	host = url.hostname
-	port = url.port
 
-	DB = psycopg2.connect(
-	        dbname=dbname,
-            user=user,
-            password=password,
-            host=host,
-            port=port
-    )
-
+	url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+	db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
+	schema = "schema.sql"
+	DB = psycopg2.connect(db)
+ 
 	cursor=DB.cursor()
 
 	print("PostgreSQL server information:")

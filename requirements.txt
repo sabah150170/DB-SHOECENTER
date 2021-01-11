@@ -63,3 +63,7 @@ tornado==6.0.4
 traitlets==4.3.3
 virtualenv==20.2.2
 virtualenvwrapper-win==1.2.6
+wcwidth==0.1.9
+webencodings==0.5.1
+Werkzeug==1.0.1
+widgetsnbextension==3.5.1

@@ -122,10 +122,8 @@ try:
 except (Exception, Error) as error:
 	print("Error while connecting to PostgreSQL", error)
    
-
+app = Flask(__name__)
 def create_app():
-	app = Flask(__name__)
-
 	@app.route("/")
 	def index():
 		return render_template("index.html")

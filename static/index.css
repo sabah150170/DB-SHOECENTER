@@ -1,0 +1,41 @@
+body {
+	background-image: url('../static/o3.jpg');
+	background-repeat:no-repeat;
+	background-size: cover;}
+
+h1 {
+	 margin-top: 50px;
+	  margin-bottom: 20px;
+	  margin-right: 60px;
+	  margin-left: 250px; 
+	color:white;
+	font-size: 40px;}
+
+h2 {
+	  margin-top: 30px;
+	  margin-bottom: 50px;
+	  margin-left: 100px; 
+	color:white;
+	font-size: 20px;}
+
+p {
+	color:white;
+	font-size: 20px;}
+
+.button {
+	background-color: rgb(251, 192, 45);
+		 margin-top: 10px;
+	  margin-bottom: 10px;
+	  margin-right: 170px;
+	  margin-left: 40px; 
+	border-radius: 8px;
+	color:white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 30px;
+	width: 500px;}
+
+
+
+

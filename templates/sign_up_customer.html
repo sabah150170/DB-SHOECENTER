@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign Up</title>
+    <link href="../static/sign.css" rel="stylesheet"> 
+    <link href="../static/menu.css" rel="stylesheet">    
+  </head>
+ 
+  <body>
+
+     <div class="navbar">
+        <a class="left" href="/si_customer">Sign In As Customer</a>
+        <a href="/si_company">Sign In As Company</a>
+        <a href="/su_customer">Sign Up As Customer</a>
+        <a class="right" href="/su_company">Sign Up As Company</a>
+    </div>
+
+    </br></br>
+    <div class="word"><h1>Register as Customer</h1></div>
+
+    <div align="center">
+      <div align="center" class="border">
+        <div class="notice">
+          {% if notice %}
+            {{ notice }}
+          {% endif %}
+        </div></br>
+
+        <form action="success_cus" method="POST">  <!--url_for="{{'success_c'}}"-->
+          <label for="inputName" class="sr-only">Name:</label></br>
+          <input type="text" name="inputName" id="inputName" class="form-control" placeholder="Enter Your Name" pattern="[A-Za-z ]{0,50}" size="100" 
+          title="if you have a problem please contact us"></br></br>
+          <label for="inputSurname" class="sr-only">Surname:</label></br>
+          <input type="text" name="inputSurname" id="inputSurname" class="form-control" placeholder="Enter Your Surname" pattern="[A-Za-z ]{0,50}" size="100" 
+          title="if you have a problem please contact us" ></br></br>
+
+          <label for="inputEmail" class="sr-only">Email Address:</label></br>
+          <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="someone@example.com" maxlength="100" size="100" required></br></br>
+          <label for="inputPassword" class="sr-only">Password:</label></br>
+          <input type="password" name="inputPassword" id="inputPassword" class="form-control"  placeholder="[10,20] character" minlength="10" maxlength="20" 
+          title="use strong password better for you" required></br></br>
+
+          <label for="inputBirthDate" class="sr-only">Birth Date:</label></br>
+          <input type="date" name="inputBirthDate" id="inputBirthDate" class="form-control"></br></br>
+          <label for="inputPhone" class="sr-only">Phone Number:</label></br>
+          <input type="tel" name="inputPhone" id="inputPhone" class="form-control" placeholder="5xxxxxxxxx" required pattern="[5]{1}[0-9]{9}"></br></br>
+
+          <button type="submit"> Submit </button>
+          
+        </form>
+
+      </div>
+    </div>
+
+  </body>
+  </html>
+
+<hr><p style="color:white; margin-left:600px;"><i>Written by Buse Nur Sabah</i></p></body></html>

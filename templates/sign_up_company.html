@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign Up</title>
+ 
+    <link href="../static/sign.css" rel="stylesheet">
+    <link href="../static/menu.css" rel="stylesheet"> 
+    
+    
+  </head>
+
+
+  <body>
+
+     <div class="navbar">
+        <a class="left" href="/si_customer">Sign In As Customer</a>
+        <a href="/si_company">Sign In As Company</a>
+        <a href="/su_customer">Sign Up As Customer</a>
+        <a class="right" href="/su_company">Sign Up As Company</a>
+    </div>
+
+    </br></br>
+    <div class="word"><h1>Register as Company</h1></div>
+
+    <div align="center">
+      <div align="center" class="border">
+        <div class="notice">
+          {% if notice %}
+            {{ notice }}
+          {% endif %}
+        </div></br>
+
+        <form action="success_com" method="POST">  <!--url_for="{{'success_c'}}"-->
+
+          <label for="inputCity" class="sr-only">City</label></br>
+          <input type="text" name="inputCity" id="inputCity" class="form-control" placeholder="only lower case" title="only lower case"
+          pattern="[a-z]{0,20}" size="100" required ></br></br>
+
+          <label for="inputDistrict" class="sr-only">District</label></br>
+          <input type="text" name="inputDistrict" id="inputDistrict" class="form-control" placeholder="only lower case" title="only lower case"
+          pattern="[a-z]{0,30}" size="100" required></br></br>
+
+          <label for="inputNeighborhood" class="sr-only">Neighborhood</label></br>
+          <input type="text" name="inputNeighborhood" id="inputNeighborhood" class="form-control" placeholder="only lower case" title="only lower case"
+          pattern="[a-z]{0,50}" size="100" required></br></br>
+
+          <label for="inputStreet" class="sr-only">Street</label></br>
+          <input type="text" name="inputStreet" id="inputStreet" class="form-control" placeholder="only lower case or digit" title="only lower case"
+          pattern="[a-z0-9]{0,50}" size="100" required ></br></br>
+
+          <label for="inputNumber" class="sr-only">Number</label></br>
+          <input type="text" name="inputNumber" id="inputNumber" class="form-control" placeholder="do not use slash: 49 49A " pattern="[A-Z0-9]{0,10}" title="no slash and only upper case" size="100" required></br></br>
+
+          <label for="inputPhone" class="sr-only">Phone Number:</label></br>
+          <input type="tel" name="inputPhone" id="inputPhone" class="form-control" placeholder="5xxxxxxxxx" required pattern="[5]{1}[0-9]{9}"></br></br>
+
+          <label for="inputEmail" class="sr-only">Email Address:</label></br>
+          <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="someone@example.com" maxlength="100" size="100" required></br></br>
+          <label for="inputPassword" class="sr-only">Password:</label></br>
+          <input type="password" name="inputPassword" id="inputPassword" class="form-control"  placeholder="[10,20] character" minlength="10" maxlength="20" 
+          title="use strong password better for you" required></br></br>
+
+          <button type="submit"> Submit </button>
+          
+        </form>
+      </div>
+    </div>
+  </body>
+
+        
+
+        
+      </form>
+      </div>
+ 
+       
+ 
+      <footer class="footer">
+        <p>&copy; 2020 Buse </p>
+      </footer>
+ 
+    </div>
+  </body>
+</html>

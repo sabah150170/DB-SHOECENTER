@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign In</title>
+    
+    <link href="../static/sign.css" rel="stylesheet">
+    <link href="../static/menu.css" rel="stylesheet">
+      
+  </head>
+ 
+  <body>
+ 
+    <div class="navbar">
+        <a class="left" href="/si_customer">Sign In As Customer</a>
+        <a href="/si_company">Sign In As Company</a>
+        <a href="/su_customer">Sign Up As Customer</a>
+        <a class="right" href="/su_company">Sign Up As Company</a>
+    </div>
+
+     </br></br>
+
+     <h1 class="word">Sign In as Company</h1>
+ 
+      <div align="center">
+      <div align="center" class="border">
+        <div class="notice">
+          {% if notice %}
+            {{ notice }}
+          {% endif %}
+        </div></br>
+
+        <form action="com_wel" method="POST">  <!--url_for="{{'success_c'}}"-->
+
+        <label for="inputEmail" class="sr-only">Email address</label></br>
+        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="someone@example.com" maxlength="100" size="100" required> 
+        </br></br>
+
+        <label for="inputPassword" class="sr-only">Password</label></br>
+        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" minlength="10" maxlength="20" required>
+        </br></br>
+
+        <button type="submit"> Submit </button>
+          
+        </form>
+      </div>
+ 
+       
+ 
+      <footer class="footer">
+        <p>&copy; 2020 Buse </p>
+      </footer>
+ 
+    </div>
+  </body>
+</html>

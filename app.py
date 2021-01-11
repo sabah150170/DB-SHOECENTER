@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import urllib.parse as urlparse
+import os
 import psycopg2
 from psycopg2 import Error
 
@@ -96,8 +98,21 @@ def create_tables():
 
 
 try:
-   # params=config() #read con parameters
-	DB=psycopg2.connect(database="SHOEEE", user="postgres", password="m3)S-98:/O", host="localhost", port="5432")
+    url = urlparse.urlparse(os.environ['DATABASE_URL'])
+	dbname = url.path[1:]
+	user = url.username
+	password = url.password
+	host = url.hostname
+	port = url.port
+
+	DB = psycopg2.connect(
+	        dbname=dbname,
+            user=user,
+            password=password,
+            host=host,
+            port=port
+    )
+
 	cursor=DB.cursor()
 
 	print("PostgreSQL server information:")

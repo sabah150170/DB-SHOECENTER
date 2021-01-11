@@ -558,6 +558,8 @@ def add_stock():
 		if len(shoe_id)==1:
 			cursor.execute("SELECT COUNT(STOCK_ID) FROM STOCK_INFO WHERE (SHOE_ID= %s and STORE_ID=%s)", (shoe_id[0][0], store_id,))
 			quantity_stock=cursor.fetchall()
+			
+			print(len(quantity_stock))
 
 			if len(quantity_stock)==0:
 				cursor.execute("INSERT INTO STOCK_INFO (SHOE_ID, STORE_ID, DELIVER_TIME, PRICE, SIZE, QUANTITY) VALUES (%s, %s, %s, %s, %s, %s)", (shoe_id[0][0], store_id, deliver, price, number, quantity))

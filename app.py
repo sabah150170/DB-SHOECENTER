@@ -768,8 +768,11 @@ def filter_stock():
 					#cursor.execute("SELECT * FROM (SELECT * FROM STOCK_INFO WHERE " + command +"INTERSECT SELECT * FROM STOCK_INFO WHERE(PRICE <=%s AND PRICE>=%s AND DELIVER_TIME<=%s AND QUANTITY>=%s AND SIZE=%s)) AS NT1 INNER JOIN (SELECT * FROM STORE_INFO WHERE (RATE_STORE>=%s)) AS NW2 USING(STORE_ID)", (result))
 					result=cursor.fetchall()
 
-				print(result)
-				return render_template("company_welcome.html", company_id=sid, result2=result, size2=len(result))
+				if len(result)==0:
+					notice="No stock is found according to your filters, please change your filter or do not select anything."
+					return render_template("company_welcome.html", company_id=sid, notice=notice)
+				else:
+					return render_template("company_welcome.html", company_id=sid, result2=result, size2=len(result))
 
 			else:
 				notice="No stock is found according to your filters, please change your filter or do not select anything."

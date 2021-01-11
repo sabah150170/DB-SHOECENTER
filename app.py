@@ -562,7 +562,7 @@ def add_stock():
 			print("----------------",len(quantity_stock),"-------1")
 			
 
-			if quantity_stock[0][0]==0:
+			if len(quantity_stock)==0:
 				cursor.execute("INSERT INTO STOCK_INFO (SHOE_ID, STORE_ID, DELIVER_TIME, PRICE, SIZE, QUANTITY) VALUES (%s, %s, %s, %s, %s, %s)", (shoe_id[0][0], store_id, deliver, price, number, quantity))
 				DB.commit()
 				return render_template("/company_welcome.html", company_id=store_id, notice="Creation Successful")	

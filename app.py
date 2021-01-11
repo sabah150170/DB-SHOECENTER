@@ -4,6 +4,8 @@ import os
 import psycopg2
 from psycopg2 import Error
 
+app = Flask(__name__)
+
 def create_tables():
 	commands=(
 		""" CREATE TABLE IF NOT EXISTS CUSTOMER_INFO(
@@ -98,7 +100,6 @@ def create_tables():
 
 
 try:
-
 	url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 	db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
 	schema = "schema.sql"
@@ -122,7 +123,7 @@ try:
 except (Exception, Error) as error:
 	print("Error while connecting to PostgreSQL", error)
    
-app = Flask(__name__)
+
 def create_app():
 	@app.route("/")
 	def index():

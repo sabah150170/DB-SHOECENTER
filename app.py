@@ -171,7 +171,8 @@ def success_cus():
 		DB.commit()
 		return render_template("sign_in_customer.html", notice="Registiration is success")
 
-	else: return render_template("sign_up_customer.html")
+	else: 
+		return render_template("sign_up_customer.html")
 
 @app.route("/success_com", methods=['POST'])
 def success_com():
@@ -207,7 +208,8 @@ def success_com():
 
 		return render_template("sign_in_company.html", notice="Registiration is success")
 
-	else: return render_template("sign_up_company.html")
+	else: 
+		return render_template("sign_up_company.html")
 
 @app.route("/cus_wel", methods=['POST'])
 def customer_welcome():
@@ -257,7 +259,8 @@ def company_welcome():
 			else:
 				return render_template("sign_in_company.html", notice="invalid password")
 
-	else: return render_template("sign_in_company.html")
+	else: 
+		return render_template("sign_in_company.html")
 
 @app.route("/cng_pro_cus", methods=['POST'])
 def change_profile_customer():
@@ -639,9 +642,9 @@ def filter_stock():
 		if brands[0]=="All" and colors[0]=="All" and features[0]=="All" and genders[0]=="All":
 			cursor.execute("SELECT * FROM SHOE_INFO  WHERE(RATE_SHOE >= %s) ORDER BY RATE_SHOE DESC",(rate_shoe,))
 			all_rows=cursor.fetchall()
-		if len(all_rows)==0:
-				notice="No shoe is find according to your filters, please change your filter or do not select anything."
-				return render_template("company_welcome.html", company_id=sid, notice=notice)
+			if len(all_rows)==0:
+					notice="No shoe is find according to your filters, please change your filter or do not select anything."
+					return render_template("company_welcome.html", company_id=sid, notice=notice)
 			else:
 				notice:"Select shoes which will be included your stock"
 				return render_template("company_welcome.html", company_id=sid, result=all_rows, notice=notice) 

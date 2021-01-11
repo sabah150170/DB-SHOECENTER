@@ -559,10 +559,10 @@ def add_stock():
 			cursor.execute("SELECT COUNT(STOCK_ID) FROM STOCK_INFO WHERE (SHOE_ID= %s and STORE_ID=%s)", (shoe_id[0][0], store_id,))
 			quantity_stock=cursor.fetchall()
 			
-			print("----------------",quantity_stock,"-------1")
+			print("----------------",quantity_stock[0][0],"-------1")
 			
 
-			if len(quantity_stock)==0:
+			if quantity_stock[0][0]==0:
 				cursor.execute("INSERT INTO STOCK_INFO (SHOE_ID, STORE_ID, DELIVER_TIME, PRICE, SIZE, QUANTITY) VALUES (%s, %s, %s, %s, %s, %s)", (shoe_id[0][0], store_id, deliver, price, number, quantity))
 				DB.commit()
 				return render_template("/company_welcome.html", company_id=store_id, notice="Creation Successful")	

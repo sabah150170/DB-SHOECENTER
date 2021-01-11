@@ -771,10 +771,6 @@ def filter_stock():
 					
 				if(len(result))==0:
 					return render_template("company_welcome.html", company_id=sid, notice="No stock is found according to your filters, please change your filter or do not select anything.")
-					
-				print("--------------------1")
-				print(result)
-				print("--------------------2")
 				else:
 					return render_template("company_welcome.html", company_id=sid, result2=result, size2=len(result))
 

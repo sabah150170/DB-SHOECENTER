@@ -1051,7 +1051,7 @@ def buy_shoes():
 				cursor.execute("UPDATE BASKET SET QUANTITY =%s WHERE (STOCK_ID=%s and CUSTOMER_ID=%s)",(quantity, stock_id, customer_id,))
 				DB.commit()
 
-			return render_template("customer_welcome.html", notice="You can visit your basket to buy them", customer_id=cid)
+			return render_template("customer_welcome.html", notice="You can visit your basket to buy them", customer_id=customer_id)
 
 		elif quantity_s[0][0]==0:
 			return render_template("customer_welcome.html", notice="No left!", customer_id=customer_id)

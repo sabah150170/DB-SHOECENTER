@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
-import urllib.parse as urlparse
+#import urllib.parse as urlparse
 import os
 import psycopg2
 from psycopg2 import Error
+from datetime import datetime
 
 
 
@@ -103,11 +104,8 @@ def create_tables():
 
 
 try:
-	url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
-	db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
-	schema = "schema.sql"
-	DB = psycopg2.connect(db)
-
+	DB=psycopg2.connect(database="SHOEEE", user="postgres", password="m3)S-98:/O", host="localhost", port="5432")
+ 
 	cursor=DB.cursor()
 
 	print("PostgreSQL server information:")
@@ -126,8 +124,6 @@ try:
 except (Exception, Error) as error:
 	print("Error while connecting to PostgreSQL", error)
    
-
-
 
 @app.route("/")
 def index():
@@ -776,20 +772,13 @@ def filter_stock():
 
 					#cursor.execute("SELECT * FROM (SELECT * FROM STOCK_INFO WHERE " + command +"INTERSECT SELECT * FROM STOCK_INFO WHERE(PRICE <=%s AND PRICE>=%s AND DELIVER_TIME<=%s AND QUANTITY>=%s AND SIZE=%s)) AS NT1 INNER JOIN (SELECT * FROM STORE_INFO WHERE (RATE_STORE>=%s)) AS NW2 USING(STORE_ID)", (result))
 					result=cursor.fetchall()
-					if len(result)!=0:
-						return render_template("company_welcome.html", company_id=sid, result2=result, size2=len(result))
-					else:
-						notice="No stock is found according to your filters, please change your filter or do not select anything."
-						return render_template("company_welcome.html", company_id=sid, notice=notice)
 
+				if len(result)!=0:
+					return render_template("company_welcome.html", company_id=sid, result2=result, size2=len(result))
+				else:
+					notice="No stock is found according to your filters, please change your filter or do not select anything."
+					return render_template("company_welcome.html", company_id=sid, notice=notice)
 
-					if len(result)!=0:
-						return render_template("company_welcome.html", company_id=sid, result2=result, size2=len(result))
-					else:
-						notice="No stock is found according to your filters, please change your filter or do not select anything."
-						return render_template("company_welcome.html", company_id=sid, notice=notice)
-					
-					
 			else:
 				notice="No stock is found according to your filters, please change your filter or do not select anything."
 				return render_template("company_welcome.html", company_id=sid, notice=notice)
@@ -1031,16 +1020,14 @@ def customer_find():
 					result=cursor.fetchall()
 
 				if len(result)!=0:
-					return render_template("company_welcome.html", company_id=sid, result2=result, size2=len(result))
+					return render_template("customer_welcome.html", customer_id=sid, result2=result, size2=len(result))
 				else:
 					notice="No stock is found according to your filters, please change your filter or do not select anything."
-					return render_template("company_welcome.html", company_id=sid, notice=notice)
+					return render_template("customer_welcome.html", customer_id=sid, notice=notice)
 
 			else:
 				notice="No stock is found according to your filters, please change your filter or do not select anything."
 				return render_template("customer_welcome.html", customer_id=sid, notice=notice)
-
-
 
 @app.route("/buy_shoes", methods=['POST'])
 def buy_shoes():
@@ -1071,12 +1058,101 @@ def buy_shoes():
 		else:
 			return render_template("customer_welcome.html", notice="Something is going wrong, please contact us!", customer_id=customer_id)
 
+@app.route("/almost_done", methods=['POST'])
+def almost_done():
+	if request.method=='POST':   
+		customer_id=request.form['basket_4']
+		shoe_id=request.form['basket_0']
+		store_id=request.form['basket_1']
+		price=request.form['basket_7']
+		quantity=request.form['quantity']
+		size=request.form['basket_8']
+		name=request.form['inputName']
+		surname=request.form['inputSurname']
+
+		city=request.form['inputCity']
+		district=request.form['inputDistrict']
+		neighborhood=request.form['inputNeighborhood']
+		street=request.form['inputStreet']
+		gate=request.form['inputNumber']
+
+		card_no=request.form['card_no']
+		cvv=request.form['cvv']
+		expire=request.form['expire']
+
+		now = datetime.now()
+		order_date = str(now.year)+"-"+str(now.month)+"-"+str(now.day)
+
+		cursor.execute("SELECT CARD_ID FROM CREDIT_CARD WHERE(NAME=%s and SURNAME=%s and CARD_NO=%s and CVV_CVC=%s and EXPIRES=%s )",(name,surname,card_no,cvv,expire))
+		card_id=cursor.fetchall()
+
+		if len(card_id)==0:
+			cursor.execute("SELECT CARD_ID FROM CREDIT_CARD WHERE CARD_NO=%s",(card_no,))
+			card_id=cursor.fetchall()
+			if len(card_id) !=0:
+				return render_template("customer_welcome.html", notice="Someone else's card", customer_id=customer_id)
+
+			cursor.execute("INSERT INTO CREDIT_CARD (NAME, SURNAME, CARD_NO, CVV_CVC, EXPIRES) VALUES (%s, %s, %s, %s, %s)", (name,surname,card_no,cvv,expire))
+			DB.commit()
+			cursor.execute("SELECT CARD_ID FROM CREDIT_CARD WHERE(NAME=%s and SURNAME=%s and CARD_NO=%s and CVV_CVC=%s and EXPIRES=%s )",(name,surname,card_no,cvv,expire))
+			card_id=cursor.fetchall()
+			card_id=card_id[0][0]
+
+		else:
+			card_id=card_id[0][0]
+
+		cursor.execute("SELECT ADDRESS_ID FROM ADDRESS WHERE (CITY=%s and DISTRICT=%s and NEIGHBORHOOD=%s and STREET=%s and GATE_NO=%s and ADDRESS_TYPE='C')", (city, district, neighborhood, street, gate))
+		address_id=cursor.fetchall()
+		if len(address_id) == 0:	
+			address_type='C'
+			cursor.execute("INSERT INTO ADDRESS (CITY, DISTRICT, NEIGHBORHOOD, STREET, GATE_NO, ADDRESS_TYPE) VALUES (%s, %s, %s, %s, %s, %s)", (city, district, neighborhood, street, gate, address_type))
+			DB.commit()
+			cursor.execute("SELECT ADDRESS_ID FROM ADDRESS WHERE (CITY=%s and DISTRICT=%s and NEIGHBORHOOD=%s and STREET=%s and GATE_NO=%s and ADDRESS_TYPE='C')", (city, district, neighborhood, street, gate))
+			address_id=cursor.fetchall()
+			address_id=address_id[0][0]
+		else:
+			address_id=address_id[0][0]
+
+		cursor.execute("SELECT QUANTITY FROM STOCK_INFO WHERE (STORE_ID=%s and SHOE_ID=%s)",(store_id, shoe_id,))
+		stock_q=cursor.fetchall()
+
+		if len(stock_q) ==0:
+			return render_template("customer_welcome.html", notice="No shoes left", customer_id=customer_id)
+		else:
+			if int(stock_q[0][0]) < int(quantity) or len(stock_q)==0:
+				return render_template("customer_welcome.html", notice="Less Stock, change your quantity", customer_id=customer_id)
+			elif int(stock_q[0][0]) >= int(quantity):
+				left=int(stock_q[0][0])-int(quantity)
+				if left==0:
+					cursor.execute("SELECT STOCK_ID FROM STOCK_INFO WHERE (STORE_ID=%s and SHOE_ID=%s)",(store_id, shoe_id,))
+					stock_id=cursor.fetchall()
+					cursor.execute("DELETE FROM BASKET WHERE(STOCK_ID=%s)", (stock_id[0][0],))
+					DB.commit()
+					cursor.execute("DELETE FROM STOCK_INFO WHERE(STOCK_ID=%s)", (stock_id[0][0],))
+					DB.commit()
+				else:
+					cursor.execute("UPDATE STOCK_INFO SET QUANTITY =%s WHERE (STORE_ID=%s and SHOE_ID=%s)",(left, store_id, shoe_id,))
+					DB.commit()
+
+		cursor.execute("INSERT INTO SHOPPING_HISTORY (SHOE_ID, STORE_ID, CARD_ID, CUSTOMER_ID, ADDRESS_ID, PRICE, QUANTITY, SIZE, ORDER_DATE) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (shoe_id, store_id, card_id, customer_id, address_id, price, quantity,size,order_date))
+		DB.commit()
+		return render_template("customer_welcome.html", notice="Success", customer_id=customer_id)
+
+@app.route("/done", methods=['POST'])
+def done():
+	if request.method=='POST':   
+		customer_id=request.form['customer_id'],
+		cursor.execute("SELECT PHOTO FROM((SELECT SHOE_ID FROM SHOPPING_HISTORY WHERE customer_id=%s) as n1 left join (SELECT * FROM SHOE_INFO) as n2 using(shoe_id))", (customer_id,))
+		photo=cursor.fetchall()
+
+		if len(photo)==0:
+			return render_template("customer_welcome.html", notice="No History", customer_id=customer_id)
+		else:
+			return render_template("customer_welcome.html", size_history=len(photo), history=photo, customer_id=customer_id)
 
 
 
 app.config["DEBUG"]=True
-
-
 
 
 if __name__=="__main__":

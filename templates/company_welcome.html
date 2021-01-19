@@ -35,7 +35,7 @@
          document.getElementById("notice").innerHTML="You can filter your selection, click squares"
          document.getElementById("function").innerHTML="<form action='filter_shoes' method='POST'><p>Brand:</p><input type='hidden' id='n_brand' name='n_brand' value='7'><input type='checkbox' id='brand0' name='brand0' value='All'><label for='brand0'>All</label></br><input type='checkbox' id='brand1' name='brand1' value='New Balance'><label for='brand1'>New Balance</label></br><input type='checkbox' id='brand2' name='brand2' value='Nike'><label for='brand2'>Nike</label></br><input type='checkbox' id='brand3' name='brand3' value='Adidas'><label for='brand3'>Adidas</label></br><input type='checkbox' id='brand4' name='brand4' value='Reebok'><label for='brand4'>Reebok</label></br><input type='checkbox' id='brand5' name='brand5' value='Vans'><label for='brand5'>Vans</label></br><input type='checkbox' id='brand6' name='brand6' value='Hummel'><label for='brand6'>Hummel</label></br><p>Color:</p><input type='hidden' id='n_color' name='n_color' value='13'><input type='checkbox' id='color0' name='color0' value='All'><label for='color0'>All</label></br><input type='checkbox' id='color1' name='color1' value='Black'><label for='color1'>Black</label></br><input type='checkbox' id='color2' name='color2' value='White'><label for='color2'>White</label></br><input type='checkbox' id='color3' name='color3' value='Gray'><label for='color3'>Gray</label></br><input type='checkbox' id='color4' name='color4' value='Brown'><label for='color4'>Brown</label></br><input type='checkbox' id='color5' name='color5' value='Green'><label for='color5'>Green</label></br><input type='checkbox' id='color6' name='color6' value='Red'><label for='color6'>Red</label></br><input type='checkbox' id='color7' name='color7' value='Blue'><label for='color7'>Blue</label></br><input type='checkbox' id='color8' name='color8' value='Pink'><label for='color8'>Pink</label></br><input type='checkbox' id='color9' name='color9' value='Purple'><label for='color9'>Purple</label></br><input type='checkbox' id='color10' name='color10' value='Yellow'><label for='color10'>Yellow</label></br><input type='checkbox' id='color11' name='color11' value='Orange'><label for='color11'>Orange</label></br><input type='checkbox' id='color12' name='color12' value='Colorful'><label for='color12'>Colorful</label></br><p>Feature:</p><input type='hidden' id='n_feature' name='n_feature' value='4'><input type='checkbox' id='feature0' name='feature0' value='All'><label for='feature0'>All</label></br><input type='checkbox' id='feature1' name='feature1' value='Imitation Leather'><label for='feature1'>Imitation Leather</label></br><input type='checkbox' id='feature2' name='feature2' value='Nubuck'><label for='feature'>Nubuck</label></br><input type='checkbox' id='feature3' name='feature3' value='Textile Fabric'><label for='feature'>Textile Fabric</label></br><p>Gender:</p><input type='hidden' id='n_gender' name='n_gender' value='3'><input type='checkbox' id='gender0' name='gender0' value='All'><label for='gender0'>All</label></br><input type='checkbox' id='gender1' name='gender1' value='Male'><label for='gender1'>Male</label></br><input type='checkbox' id='gender2' name='gender2' value='Female'><label for='gender2'>Female</label></br></br><label for='rate_shoe' class='sr-only'>Lower Limit Rate</label></br><input type='number' step='1' name='rate_shoe' id='rate_shoe' class='form-control' min='0'  value='0' size='1'><input type='hidden' id='company_id' name='company_id' value={% if company_id %} {{company_id}} {% endif %}><input type='submit' value='Submit'></form>"
       }
-
+      
       function see_all_stock(){
       	document.getElementById("my_stock").innerHTML=" "
       	document.getElementById("all").innerHTML=" "
@@ -66,7 +66,7 @@
             </div>
       </div> 
 
-         <a onclick="document.my_stock.submit()">See Your Stocks and Update
+         <a onclick="document.my_stock.submit()">See Your Profile and Stocks&Update, 
    			<form action="my_stock" name="my_stock" method="POST">
      			<input type='hidden' id='company_id' name='company_id' value={% if company_id %} {{company_id}} {% endif %}>
 
@@ -170,6 +170,24 @@
       {% endif %} 
    </div>
 
+
+
+       {% if info %}
+          {% if address %}
+
+                  <p>Phone Number: {{info}}</p>
+                  <p>City: {{address[0][1]}}</p>
+                  <p>District: {{address[0][2]}}</p>
+                  <p>Neighbothood: {{address[0][3]}}</p>
+                  <p>Street: {{address[0][4]}}</p>
+                  <p>Gate: {{address[0][5]}}</p>
+            
+          {% endif %}
+       {% endif %}
+
+
+
+
       <div id=my_stock>
 
 	      {% if result3 %}
@@ -212,8 +230,6 @@
 		      {% endif %}
 		   {% endif %}
    </div>
-
-
 
 
  

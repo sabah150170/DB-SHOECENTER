@@ -16,6 +16,7 @@
    		document.getElementById("welcome").innerHTML=" " 
       document.getElementById("info").innerHTML=" "
       document.getElementById("basket").innerHTML=" "
+      document.getElementById("done").innerHTML=" " 
    		document.getElementById("function").innerHTML="<form action='cng_pro_cus' method='POST'><label for='inputName' class='sr-only'>Name:</label></br><input type='text' name='inputName' id='inputName' class='form-control' placeholder='Enter Your Name' pattern='[A-Za-z ]{0,50}' size='100'></br></br><label for='inputSurname' class='sr-only'>Surname:</label></br> <input type='text' name='inputSurname' id='inputSurname' class='form-control' placeholder='Enter Your Surname' pattern='[A-Za-z ]{0,50}' size='100'></br></br><label for='inputPassword' class='sr-only'>Password</label></br><input type='password' name='inputPassword' id='inputPassword' class='form-control' placeholder='Password' minlength='10' maxlength='20'></br></br><label for='inputPassword' class='sr-only'>Password:</label></br><input type='password' name='inputPassword' id='inputPassword' class='form-control'  placeholder='[10,20] character' minlength='10' maxlength='20' title='use strong password better for you'></br></br><label for='inputBirthDate' class='sr-only'>Birth Date:</label></br><input type='date' name='inputBirthDate' id='inputBirthDate' class='form-control'></br></br><label for='inputPhone class='sr-only'>Phone Number:</label></br><input type='tel' name='inputPhone' id='inputPhone' class='form-control' placeholder='5xxxxxxxxx' pattern='[5]{1}[0-9]{9}'></br></br><input type='hidden' id='customer_id' name='customer_id' value={% if customer_id %} {{customer_id}} {% endif %}><input type='submit' value='Submit'>"
    	}  
 
@@ -30,29 +31,19 @@
       document.getElementById("info").innerHTML=" "
    		document.getElementById("welcome").innerHTML=" "
       document.getElementById("basket").innerHTML=" " 
+      document.getElementById("done").innerHTML=" " 
       document.getElementById("function").innerHTML="<form action='customer_find' method='POST'><p>Brand:</p><input type='hidden' id='n_brand' name='n_brand' value='7'><input type='checkbox' id='brand0' name='brand0' value='All'><label for='brand0'>All</label></br><input type='checkbox' id='brand1' name='brand1' value='New Balance'><label for='brand1'>New Balance</label></br><input type='checkbox' id='brand2' name='brand2' value='Nike'><label for='brand2'>Nike</label></br><input type='checkbox' id='brand3' name='brand3' value='Adidas'><label for='brand3'>Adidas</label></br><input type='checkbox' id='brand4' name='brand4' value='Reebok'><label for='brand4'>Reebok</label></br><input type='checkbox' id='brand5' name='brand5' value='Vans'><label for='brand5'>Vans</label></br><input type='checkbox' id='brand6' name='brand6' value='Hummel'><label for='brand6'>Hummel</label></br><p>Color:</p><input type='hidden' id='n_color' name='n_color' value='13'><input type='checkbox' id='color0' name='color0' value='All'><label for='color0'>All</label></br><input type='checkbox' id='color1' name='color1' value='Black'><label for='color1'>Black</label></br><input type='checkbox' id='color2' name='color2' value='White'><label for='color2'>White</label></br><input type='checkbox' id='color3' name='color3' value='Gray'><label for='color3'>Gray</label></br><input type='checkbox' id='color4' name='color4' value='Brown'><label for='color4'>Brown</label></br><input type='checkbox' id='color5' name='color5' value='Green'><label for='color5'>Green</label></br><input type='checkbox' id='color6' name='color6' value='Red'><label for='color6'>Red</label></br><input type='checkbox' id='color7' name='color7' value='Blue'><label for='color7'>Blue</label></br><input type='checkbox' id='color8' name='color8' value='Pink'><label for='color8'>Pink</label></br><input type='checkbox' id='color9' name='color9' value='Purple'><label for='color9'>Purple</label></br><input type='checkbox' id='color10' name='color10' value='Yellow'><label for='color10'>Yellow</label></br><input type='checkbox' id='color11' name='color11' value='Orange'><label for='color11'>Orange</label></br><input type='checkbox' id='color12' name='color12' value='Colorful'><label for='color12'>Colorful</label></br><p>Feature:</p><input type='hidden' id='n_feature' name='n_feature' value='4'><input type='checkbox' id='feature0' name='feature0' value='All'><label for='feature0'>All</label></br><input type='checkbox' id='feature1' name='feature1' value='Imitation Leather'><label for='feature1'>Imitation Leather</label></br><input type='checkbox' id='feature2' name='feature2' value='Nubuck'><label for='feature'>Nubuck</label></br><input type='checkbox' id='feature3' name='feature3' value='Textile Fabric'><label for='feature'>Textile Fabric</label></br><p>Gender:</p><input type='hidden' id='n_gender' name='n_gender' value='3'><input type='checkbox' id='gender0' name='gender 0' value='All'><label for='gender0'>All</label></br><input type='checkbox' id='gender1' name='gender1' value='Male'><label for='gender1'>Male</label></br><input type='checkbox' id='gender2' name='gender2' value='Female'><label for='gender2'>Female</label></br></br><label for='deliver' class='sr-only'>Upper Limit Deliver Time</label></br><input type='number' step='1' name='deliver' id='deliver' class='form-control' min='1' max='7' value='7' size='1'></br></br><label for='price_lower' class='sr-only'>Lower Limit Price</label></br><input type='number' step='10' name='price_lower' id='price_lower' class='form-control' min='0'  value='0' size='1'></br></br><label for='price_upper' class='sr-only'>Upper Limit Price</label></br><input type='number' step='10' name='price_upper' id='price_upper' class='form-control' value='1000' size='1'></br></br><label for='size' class='sr-only'>Size-0 mean no filter size</label></br><input type='number' step='0.5' name='size' id='size' class='form-control' value='0' size='1'></br></br><label for='quantity' class='sr-only'>Lower Limit Quantity</label></br><input type='number' step='1' name='quantity' id='quantity' class='form-control' min='0'  value='0' size='1'></br></br><label for='rate_shoe' class='sr-only'>Lower Limit Shoe Rate</label></br><input type='number' step='1' name='rate_shoe' id='rate_shoe' class='form-control' min='0'  value='0' size='1'></br></br><label for='rate_store' class='sr-only'>Lower Limit Store Rate</label></br><input type='number' step='1' name='rate_store' id='rate_store' class='form-control' value='0' min='0' size='1'></br></br><input type='hidden' id='customer_id' name='customer_id' value={% if customer_id %} {{customer_id}} {% endif %}><input type='submit' value='Submit'></form>"
 	}
-
-  function shopping_history(){
-      document.getElementById("all").innerHTML=" "
-      document.getElementById("notice").innerHTML=" "
-      document.getElementById("info").innerHTML=" "
-      document.getElementById("welcome").innerHTML=" " 
-      document.getElementById("function").innerHTML=" "
-      document.getElementById("basket").innerHTML=" "
-
-  }
 
 
 
    </script>
 
 
-
  
   <div class="navbar2">
         <a onclick="find_shoes()">Find Shoes</a>
-        <a onclick="shopping_history()">Shopping History</a>
+        <a><form action='done' method='POST'><input type='hidden' id='customer_id' name='customer_id' value={% if customer_id %} {{customer_id}} {% endif %}><button class="button1" type="submit">Shopping History</button></form></a>
 
         <a><form action='my_bskt_cus' method='POST'><input type='hidden' id='customer_id' name='customer_id' value={% if customer_id %} {{customer_id}} {% endif %}><button class="button1" type="submit">My Basket and Profile</button></form></a>
 
@@ -84,8 +75,9 @@
  <div id=all>  
       {% if result2 %}
          {% if size2 %}
+         {% if customer_id %}
             {% for i in range(0,size2) %}
-      
+
                <div class=shoe2>
  
                   <img src='../../static/{{result2[i][2]}}' alt="shoe" align="left" width="290" height="240">
@@ -105,9 +97,9 @@
 
                   <form action="buy_shoes" method="POST">
                   <label for='quantity' class='sr-only'>Quantity</label></br>
-                  <input type='number' step='1' name='quantity' id='quantity' class='form-control' min='1' max={{result2[i][12]}} size='1'></br></br>
+                  <input type='number' step='1' name='quantity' id='quantity' class='form-control' min='1' value="1" max={{result2[i][12]}} size='1'></br></br>
           
-                  <input type='hidden' id='customer_id' name='customer_id' value={% if customer_id %} {{customer_id}} {% endif %}>
+                  <input type='hidden' id='customer_id' name='customer_id' value= {{customer_id}}>
                   <input type='hidden' id='stock_id' name='stock_id' value= {{result2[i][8]}} >
                   <input type='submit' value='Select'>
 
@@ -116,6 +108,7 @@
 
             {% endfor %}
          {% endif %}
+          {% endif %}
       {% endif %} 
    </div>
 
@@ -156,10 +149,52 @@
         <p>Deliver Time: {{basket[i][6]}}</p>
 
         <form action="almost_done" method="POST">
-        <label for='quantity' class='sr-only'>You can change quantity</label></br>
-        <input type='number' step='1' name='quantity' id='quantity' class='form-control' max={{basket[i][9]}} size='1'></br></br>
-          
-        <input type='hidden' id='basket' name='basket' value= {{basket[i]}} >
+    
+          <label for='quantity' class='sr-only'>You can change quantity</label></br>
+          <input type='number' step='1' name='quantity' id='quantity' class='form-control' min="1" value={{basket[i][5]}} max={{basket[i][9]}} size='1'></br></br>
+
+          <label for="inputCity" class="sr-only">City</label></br>
+          <input type="text" name="inputCity" id="inputCity" class="form-control" placeholder="only lower case" title="only lower case"
+          pattern="[a-z]{0,20}" size="100" required ></br></br>
+
+          <label for="inputDistrict" class="sr-only">District</label></br>
+          <input type="text" name="inputDistrict" id="inputDistrict" class="form-control" placeholder="only lower case" title="only lower case"
+          pattern="[a-z]{0,30}" size="100" required></br></br>
+
+          <label for="inputNeighborhood" class="sr-only">Neighborhood</label></br>
+          <input type="text" name="inputNeighborhood" id="inputNeighborhood" class="form-control" placeholder="only lower case" title="only lower case"
+          pattern="[a-z]{0,50}" size="100" required></br></br>
+
+          <label for="inputStreet" class="sr-only">Street</label></br>
+          <input type="text" name="inputStreet" id="inputStreet" class="form-control" placeholder="only lower case or digit" title="only lower case"
+          pattern="[a-z0-9]{0,50}" size="100" required ></br></br>
+
+          <label for="inputNumber" class="sr-only">Number</label></br>
+          <input type="text" name="inputNumber" id="inputNumber" class="form-control" placeholder="do not use slash: 49 49A " pattern="[A-Z0-9]{0,10}" title="no slash and only upper case" size="100" required></br></br>
+
+          <label for="inputName" class="sr-only">Name:</label></br>
+          <input type="text" name="inputName" id="inputName" class="form-control" placeholder="Enter Your Name" pattern="[A-Za-z ]{0,50}" size="100" 
+          title="if you have a problem please contact us" required></br></br>
+          <label for="inputSurname" class="sr-only">Surname:</label></br>
+          <input type="text" name="inputSurname" id="inputSurname" class="form-control" placeholder="Enter Your Surname" pattern="[A-Za-z ]{0,50}" size="100" 
+          title="if you have a problem please contact us" required></br></br>
+
+          <label for="card_no" class="sr-only">Card No</label></br>
+          <input type="text" name="card_no" id="card_no" class="form-control" title="16 digits" pattern="[0-9]{16}" size="100" required></br></br>
+
+          <label for="cvv" class="sr-only">CVV/CVC</label></br>
+          <input type="text" name="cvv" id="cvv" class="form-control" placeholder="xxx" title="3 digits" pattern="[0-9]{3}" size="10" required></br></br>
+
+          <label for="expire" class="sr-only">Expires</label></br>
+          <input type="text" name="expire" id="expire" class="form-control" title="like 12/22" placeholder="mm/yy" pattern="[0-9]{2}[/][0-9]{2}" size="10" required></br></br>
+
+          <input type="hidden" id="basket_4" name="basket_4" value= {{basket[i][4]}} >        
+          <input type='hidden' id='basket_0' name='basket_0' value= {{basket[i][0]}} >
+          <input type='hidden' id='basket_8' name='basket_8' value= {{basket[i][8]}} >
+          <input type='hidden' id='basket_1' name='basket_1' value= {{basket[i][1]}} >
+          <input type='hidden' id='basket_5' name='basket_5' value= {{basket[i][5]}} >
+          <input type='hidden' id='basket_7' name='basket_7' value= {{basket[i][7]}} >
+
         <input type='submit' value='Select'>
         </form>
 
@@ -173,8 +208,22 @@
 
 
 
+<div id=done>  
+      {% if history %}
+         {% if size_history %}
+         {% if customer_id %}
+            {% for i in range(0,size_history) %}
 
-     	
+                  <img src='../../static/{{history[i][0]}}' alt="shoe" align="left" width="290" height="240">
+
+
+            {% endfor %}
+         {% endif %}
+          {% endif %}
+      {% endif %} 
+   </div>
+
+
 
 </body>
 </html>

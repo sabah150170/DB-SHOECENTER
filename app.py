@@ -5,10 +5,7 @@ import psycopg2
 from psycopg2 import Error
 from datetime import datetime
 
-
-
 app = Flask(__name__)
-
 
 def create_tables():
 	commands=(
@@ -104,8 +101,11 @@ def create_tables():
 
 
 try:
-	DB=psycopg2.connect(database="SHOEEE", user="postgres", password="m3)S-98:/O", host="localhost", port="5432")
- 
+	url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+	db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
+	schema = "schema.sql"
+	DB = psycopg2.connect(db)
+
 	cursor=DB.cursor()
 
 	print("PostgreSQL server information:")
